@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBmFFT\src\arithmetic.cpp">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxBmFFT\src\bmFFT.cpp">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxBmFFT">
+			<UniqueIdentifier>{A0E045DC-6A65-AE39-E29D-448E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxBmFFT\src">
+			<UniqueIdentifier>{C92E7AA1-2ED5-F624-2536-8D11}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxBmFFT\src\arithmetic.h">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxBmFFT\src\bmFFT.h">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxBmFFT\src\logic.h">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxBmFFT\src\meta.h">
+			<Filter>addons\ofxBmFFT\src</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
+</Project>

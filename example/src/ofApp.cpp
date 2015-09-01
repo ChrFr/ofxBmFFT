@@ -32,8 +32,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-
 	ofNoFill();
 
 	ofPushStyle();

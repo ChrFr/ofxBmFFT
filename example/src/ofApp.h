@@ -1,6 +1,11 @@
+//  ofxBmFFT
+//  ofApp.h
+//  Purpose: example app for use of ofxBmFFT addon
+//
+//  @author Christoph Franke
+//  @version 1.0 01/09/15
+
 #pragma once
-//#define OF_SOUND_PLAYER_OPENAL
-//#undef OF_SOUND_PLAYER_FMOD
 #include "ofMain.h"
 #include "bmFFT.h"
 
