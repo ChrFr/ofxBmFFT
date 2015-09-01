@@ -6,6 +6,7 @@ Performs a spectrum analysis of the transformed signal.
 ## usage
 
 download and copy into <your oF directory>/addons
+
 can be included as an addon via the project-generator provided by openFrameworks
 
 ## example
