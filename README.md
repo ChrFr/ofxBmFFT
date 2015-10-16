@@ -7,7 +7,13 @@ Performs a spectrum analysis of the transformed signal.
 
 download and copy into <your oF directory>/addons
 
+### new project
 can be included as an addon via the project-generator provided by openFrameworks
+
+### add to existing project
+* create filters \addons\ofxBmFFT\src in solution map
+* add existing files from <your oF directory>\addons\ofxBmFFT\src\ (by rightklicking or via drag and drop into src-filter)
+* add additional dependency ..\..\..\addons\ofxBmFFT\src\ (rightklick project, select properties->configuration->c/c++->general)
 
 ## example
 
