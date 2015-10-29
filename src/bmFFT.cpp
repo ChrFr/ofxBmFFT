@@ -69,7 +69,6 @@ void BmFFT::getSpectrum(const int numSamples, const float * samples, float * ban
 				// interchanging
 				bandVolumes[band * 2] = leftSum / counter;
 				bandVolumes[band * 2 + 1] = rightSum / counter;
-				std::cout<<band<<" - "<<oBand<<"\n";
 				counter = 0;
 				leftSum = 0;
 				rightSum = 0;
