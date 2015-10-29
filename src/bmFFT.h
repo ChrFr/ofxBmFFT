@@ -17,7 +17,10 @@ public:
 	//
 	//  @param magnitude <no idea why baumeister calls it magnitude, in fact it determines the number of samples, see parameter samples>
 	//  @param samples the stereo samples to be analyzed, stereo channels are interleaved (even numbers left channel, uneven right channel), expected to contain 2 * 2^magnitude complex numbers.
-	//  @param numBands the number of bands, the spectrum will be seperated into
-	//  @param bandVolumes  array of floats, where the volumes of the bands are stored in(between 0 an 1), stereo channels are interleaved (even numbers left channel, uneven right channel), length is numBands * 2	
-	static void getSpectrum(const int magnitude, const float * samples, const int numBands, float * bandVolumes);
+	//  @param bandVolumes  array of floats, where the volumes of the bands are stored in(between 0 an 1), 
+	//		   stereo channels are interleaved (even numbers left channel, uneven right channel), 
+	//		   length is       2 * (log2(numSamples / 2) - 1) * 3	        
+	//                    nr channels       octaves        1/3 octave
+	//		   (e.g. 42 for a buffersize of 512, 21 for each channel)
+	static void getSpectrum(const int buffersize, const float * samples, float * bandVolumes);
 };

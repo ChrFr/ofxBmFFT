@@ -56,13 +56,12 @@ void ofApp::draw(){
 	ofEndShape(false);
 
 	// do the FFT and compute spectrum
-	BmFFT::getSpectrum(MAGNITUDE, samples, N_BANDS, bandVolumes);
-
+	BmFFT::getSpectrum(BUFFER_SIZE, samples, bandVolumes);
 
 	// draw the FFT
 	for (int i = 0; i < N_BANDS; i++){
-		ofLine(50 + (i * 3), 600, 50 + (i * 3), 600 - bandVolumes[i * 2] * 300); //left
-		ofLine(650 + (i * 3), 600, 650 + (i * 3), 600 - bandVolumes[i * 2 + 1] * 300); //right
+		ofLine(50 + (i * 3), 600, 50 + (i * 3), 600 - bandVolumes[i * 2] * 100); //left
+		ofLine(650 + (i * 3), 600, 650 + (i * 3), 600 - bandVolumes[i * 2 + 1] * 100); //right
 	}
 	
 	ofPopMatrix();
