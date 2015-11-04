@@ -6,26 +6,33 @@ double log2(double x){
 }
 
 void BmFFT::getSimpleSpectrum(const int numSamples, const float * samples, float * bandVolumes){
-	int magnitude = log2(numSamples / 2);
+	int samplesPerChan = numSamples / 2;
+	int magnitude = log2(numSamples);
 
-	std::complex<float>* complexSamples = new std::complex<float>[numSamples / 2];
-
-	for (int i = 0; i < numSamples / 2; i++){
-		complexSamples[i] = std::complex<float>(samples[i * 2], samples[i * 2 + 1]);
+	std::complex<float>* complexSamples = new std::complex<float>[numSamples];
+	
+	for (int i = 0; i < samplesPerChan; i++){
+		complexSamples[i] = std::complex<float>(samples[i * 2], 0);
+		complexSamples[i + samplesPerChan] = std::complex<float>(samples[i * 2 + 1], 0);
 	}
+
+	/*
+	for (int i = 0; i < samplesPerChan / 2; i++){
+		complexSamples[i] = std::complex<float>(samples[i * 2], samples[i * 2 + 1]);
+	}*/
 	
 	// do the fft
 	emath::fft(false, magnitude, complexSamples);
 	// seperate left and right channel
 	emath::fold(false, magnitude, complexSamples);
 	
-	float * leftMagnitude = new float[numSamples / 2];
-	float * rightMagnitude = new float[numSamples / 2];
+	float * leftMagnitude = new float[samplesPerChan];
+	float * rightMagnitude = new float[samplesPerChan];
 	float out_real, out_img, power;
 
 	//first element of each half contains unnessecary information
 	//ascending first half
-	for (int i = 1; i < numSamples / 2; i++) {
+	for (int i = 1; i < samplesPerChan; i++) {
 		out_real = complexSamples[i].real();
 		out_img = complexSamples[i].imag();
 
@@ -34,20 +41,21 @@ void BmFFT::getSimpleSpectrum(const int numSamples, const float * samples, float
 	}
 
 	// ascending 2nd half
-	for (int i = numSamples - 1; i > numSamples / 2; i--) {
+	for (int i = numSamples - 1; i > samplesPerChan; i--) {
 		out_real = complexSamples[i].real();
 		out_img = complexSamples[i].imag();
 
 		power = out_real * out_real + out_img * out_img;
-		rightMagnitude[numSamples - i - 1] = 2.0*sqrt(power);
+		rightMagnitude[i - samplesPerChan - 1] = 2.0*sqrt(power);
 	}
 
-	int half = numSamples / 4;
+	int half = samplesPerChan / 2;
 	int counter = 0;
-	int band = magnitude - 1;
+	int band = magnitude - 2;
 	float leftSum = 0;
 	float rightSum = 0;
-	for (int i = numSamples / 2; i > 0; i--){
+	// last value is not set
+	for (int i = samplesPerChan - 2; i > 0; i--){
 		leftSum += leftMagnitude[i];
 		rightSum += rightMagnitude[i];
 		counter++;
@@ -61,41 +69,6 @@ void BmFFT::getSimpleSpectrum(const int numSamples, const float * samples, float
 			counter = 0;
 		}
 	}
-	/*
-	int numOct = log2(numSamples / 2) - 1;
-	int half = (numSamples / 2 - 1) / 2;
-	// octaves
-	for (int i = numSamples / 2 - 1; i >= 0; i--){
-		int half = high / 2;		
-		// special case: next to last octave only has 2 values-> take last octave(single value) as last third (-> last band is duplicated)
-		if(high - low == 2){
-			low--;
-		}
-		float leftSum = 0;
-		float rightSum = 0;
-		int step = (high - low) / 3;
-		int counter = 0;
-		int oBand = 0;
-		// divide octave into equal thirds
-		for(int k = high; k > low; k--){
-			counter ++;			
-			leftSum += leftMagnitude[k];
-			rightSum += rightMagnitude[k];
-			if(counter >= step){
-				int band = 3 * i - oBand;
-				// interchanging
-				bandVolumes[band * 2] = leftSum / counter;
-				bandVolumes[band * 2 + 1] = rightSum / counter;
-				counter = 0;
-				leftSum = 0;
-				rightSum = 0;
-				oBand++;
-			}
-			if(oBand >= 3)
-				break;
-		}
-		high /= 2;
-	}*/
 
 	delete[]complexSamples;
 	delete[]leftMagnitude;

@@ -10,8 +10,7 @@
 #include "bmFFT.h"
 
 #define BUFFER_SIZE 512
-#define MAGNITUDE 8
-#define N_BANDS 30
+#define N_BANDS 9
 
 class ofApp : public ofBaseApp{
 
