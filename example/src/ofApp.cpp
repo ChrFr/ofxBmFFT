@@ -43,25 +43,22 @@ void ofApp::draw(){
 	
 	// draw the left channel:
 	ofBeginShape();
-	for (unsigned int i = 0; i < BUFFER_SIZE / 2; i++){
+	for (unsigned int i = 0; i < BUFFER_SIZE; i++){
 		ofVertex(50 + i * 2, 100 - samples[i * 2] * 180.0f);
 	}	
 	ofEndShape(false);
 	
 	// draw the right channel:
 	ofBeginShape();
-	for (unsigned int i = 0; i < BUFFER_SIZE / 2; i++){
+	for (unsigned int i = 0; i < BUFFER_SIZE; i++){
 		ofVertex(650 + i * 2, 100 - samples[i * 2 + 1] * 180.0f);
 	}	
 	ofEndShape(false);
 
-	// do the FFT and compute spectrum
-	BmFFT::getSpectrum(BUFFER_SIZE, samples, bandVolumes);
-
 	// draw the FFT
 	for (int i = 0; i < N_BANDS; i++){
-		ofLine(50 + (i * 3), 600, 50 + (i * 3), 600 - bandVolumes[i * 2] * 100); //left
-		ofLine(650 + (i * 3), 600, 650 + (i * 3), 600 - bandVolumes[i * 2 + 1] * 100); //right
+		ofLine(50 + (i * 3), 600, 50 + (i * 3), 600 - bandVolumes[i * 2] * 300); //left
+		ofLine(650 + (i * 3), 600, 650 + (i * 3), 600 - bandVolumes[i * 2 + 1] * 300); //right
 	}
 	
 	ofPopMatrix();
@@ -69,9 +66,13 @@ void ofApp::draw(){
 }
 
 void ofApp::audioReceived(float * input, int bufferSize, int nChannels){
+	// just remember the input to draw waveforms
 	for (int i = 0; i < bufferSize * 2; i++){
 		samples[i] = input[i];
 	}
+
+	// do the FFT and compute spectrum
+	BmFFT::getSimpleSpectrum(BUFFER_SIZE * 2, input, bandVolumes);
 	bufferCounter++;
 }
 
