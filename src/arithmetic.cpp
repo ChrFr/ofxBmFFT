@@ -20,7 +20,7 @@ namespace emath {
 					shuffle_pair pair;
 					pair.left = left;
 					pair.right = right;
-					table[offset++] = pair; //Christoph: cast didnt work, init struct pair added
+					table[offset++] = pair; //ADAPTED TO VISUAL C++: cast didnt work, init struct pair added
 				}
 			}
 			SHUFFLE_TABLES[magnitude] = table;

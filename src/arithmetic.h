@@ -1,7 +1,8 @@
 //  ofxBmFFT
 //  logic.h
 //  Purpose: Macros and inline functions for integral arithmetics. Note that all indices are interpreted as Euclidean modulo 64 values. Also note that most of the operations are defined as generic macros in order to permit function overloading.spectrum analysis 
-//  slight changes to adapt functions to work with Visual Studio 2012
+//  
+//  slight changes to adapt functions to work with Visual Studio 2012 by Christoph Franke
 //  @author Sascha Baumeister, Christoph Franke
 //  @version 0.8 01/09/15
 
@@ -18,7 +19,7 @@
 # define M_TAUl		6.283185307179586476925286766559005768L /* tau = 2*pi */
 #endif
  
-#ifndef M_SQRT1_2l     //WARNING: added by me (Christoph), value is an educated guess (i think constant means 1/sqrt(2))
+#ifndef M_SQRT1_2l     //ADAPTED TO VISUAL C++, constant means 1/sqrt(2)
 # define M_SQRT1_2l		0.707106781186547524401
 #endif
 
@@ -47,7 +48,7 @@ namespace emath {
 	 */
 	inline uint64_t floorLog2 (const uint64_t operand) {
 		if (operand == 0) std::raise(SIGFPE);
-		return (bitSize(uint64_t) - 1) - __lzcnt(operand); //WARNING: changed by me (Christoph) without deeper research 
+		return (bitSize(uint64_t) - 1) - __lzcnt(operand); //ADAPTED TO VISUAL C++,
 	}
 
 
@@ -59,7 +60,7 @@ namespace emath {
 	inline uint64_t ceilLog2 (const uint64_t operand) {
 		if (operand == 0) std::raise(SIGFPE);
 		if (operand == 1) return 0;
-		return (uint64_t)bitSize(uint64_t) - __lzcnt(operand - 1); //WARNING: changed by me (Christoph) without deeper research 
+		return (uint64_t)bitSize(uint64_t) - __lzcnt(operand - 1); //ADAPTED TO VISUAL C++,
 	}
 
 
