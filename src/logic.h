@@ -90,7 +90,7 @@ namespace emath {
 	template<>
 	inline signed char msb_index (const unsigned long operand) {
 		return (operand == 0) ? -1 : bitSize(unsigned long) - 1 - __lzcnt(operand); //ADAPTED TO VISUAL C++
-
+	}
 	template<>
 	inline signed char msb_index (const unsigned int operand) {
 		return (operand == 0) ? -1 : bitSize(unsigned int) - 1 - __lzcnt(operand); //ADAPTED TO VISUAL C++
